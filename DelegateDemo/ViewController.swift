@@ -8,8 +8,18 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController{
 
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    
+    @IBAction func buttonPressed(_ sender: Any) {
+        
+        let selectionVC = storyboard?.instantiateViewController(withIdentifier:"SelectionScreen") as! SelectionViewController
+        selectionVC.delegate = self
+        present(selectionVC, animated: true, completion:nil)
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -19,7 +29,16 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
 }
+
+extension ViewController: SelectionDelegate{
+    
+    func selectionButtonPressed(name:String, color:UIColor){
+        self.nameLabel.text = name
+        self.view.backgroundColor = color
+    }
+}
+
 
